@@ -1,7 +1,10 @@
 import cv2 as cv
 
-img = cv.imread('Photos/cat.jpg')
+# Reads image
+img = cv.imread('../resources/photos/cat.jpg')
 
+# Shows image
 cv.imshow('Cat', img)
 
-cv.waitkey(0)
+# Waits for keyboard key to be pressed
+cv.waitKey(0)
