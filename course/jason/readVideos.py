@@ -1,5 +1,6 @@
 import cv2 as cv
 
+
 # Captures a video from the
 capture = cv.VideoCapture('../resources/videos/dog.mp4')
 

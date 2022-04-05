@@ -2,36 +2,24 @@ import cv2 as cv
 
 
 def rescale_frame(frame, scale=0.75):
-    # width of image
-    width = int(frame.shape[1] * scale)
+    width = int(frame.shape[1] * scale) # width of image
+    height = int(frame.shape[0] * scale) # height of image
+    dimensions = (width, height) # creates a tuple of width and height
+    return cv.resize(frame, dimensions, interpolation=cv.INTER_AREA) # resize video to certain dimension
 
-    # height of image
-    height = int(frame.shape[0] * scale)
+# Read video
+capture = cv.VideoCapture('../resources/videos/dog.mp4')
 
-    # creates a tuple of width and height
-    dimensions = (width, height)
+while True:
+    isTrue, frame = capture.read()
 
-    return cv.resize(frame, dimensions, interpolation=cv.INTER_AREA)
+    # read a re-sized frame
+    frame_resized = rescale_frame(frame, scale=.6)
+    cv.imshow('Video Resized', frame_resized)
 
+    if cv.waitKey(20) & 0xFF == ord('d'):
+        break
 
-def show():
-    capture = cv.VideoCapture('../resources/videos/dog.mp4')
-
-    while True:
-        frame = capture.read()
-
-        frame_resized = rescale_frame(frame)
-
-        # read a frame
-        cv.imshow('Video', frame)
-        cv.imshow('Video Resized', frame_resized)
-
-        if cv.waitKey(20) & 0xFF == ord('d'):
-            break
-
-    capture.release()
-    cv.destroyAllWindows()
-
-
-show()
+capture.release()
+cv.destroyAllWindows()
 
